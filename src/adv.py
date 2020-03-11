@@ -1,10 +1,12 @@
 from room import Room
+from player import Player
 
+import os
+import re
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -38,6 +40,26 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+
+myPlayer = Player("Paul", room['outside'])
+print("Welcome to the Adventure Game")
+print(f"{myPlayer.current_room.name} is where {myPlayer.name} must make his choice  {myPlayer.current_room.description}")
+print("Please Choose a Room to enter")
+
+while True:
+
+    playerInput = input("-> ")
+
+    movement = ["n", "e", "s", "w"]
+
+    if playerInput == "q":
+        os.system('clear')
+        break
+    elif playerInput in movement:
+        # MOVE IN THAT DIRECTION
+        print(f"{myPlayer.name} is moving {playerInput}")
+    else:
+        print("Please Choose a valid direction")
 
 # Write a loop that:
 #
