@@ -46,8 +46,9 @@ print("Welcome to the Adventure Game")
 print(f"{myPlayer.current_room.name} is where {myPlayer.name} must make his choice  {myPlayer.current_room.description}")
 print("Please Choose a Room to enter")
 
-while True:
 
+while True:
+    print(f"You are in: {myPlayer.current_room.name}")
     playerInput = input("-> ")
 
     movement = ["n", "e", "s", "w"]
@@ -57,7 +58,39 @@ while True:
         break
     elif playerInput in movement:
         # MOVE IN THAT DIRECTION
-        print(f"{myPlayer.name} is moving {playerInput}")
+
+        if playerInput == "n":
+            if myPlayer.current_room.n_to:
+                myPlayer.current_room = myPlayer.current_room.n_to
+            else:
+                print(
+                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
+        elif playerInput == "s":
+            if myPlayer.current_room.s_to:
+                myPlayer.current_room = myPlayer.current_room.s_to
+            else:
+                print(
+                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
+        elif playerInput == "e":
+            if myPlayer.current_room.e_to:
+                myPlayer.current_room = myPlayer.current_room.e_to
+            else:
+                print(
+                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
+        elif playerInput == "w":
+            if myPlayer.current_room.w_to:
+                myPlayer.current_room = myPlayer.current_room.w_to
+            else:
+                print(
+                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
+            # elif myPlayer.current_room.e_to:
+            #     myPlayer.current_room = myPlayer.current_room.e_to
+            # elif myPlayer.current_room.s_to:
+            #     myPlayer.current_room = myPlayer.current_room.s_to
+            # elif myPlayer.current_room.w_to:
+            #     myPlayer.current_room = myPlayer.current_room.w_to
+            # else:
+        # print(f"{myPlayer.name} is moving {playerInput}")
     else:
         print("Please Choose a valid direction")
 
@@ -71,3 +104,20 @@ while True:
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+# def tryDirection(d, curRoom):
+#     """
+#     Try to move a direction, or print an error if the player can't go that way.
+#     Returns the room the player has moved to (or the same room if the player
+#     didn't move).
+#     """
+#     attrib = d + '_to'
+
+#     # See if the room has the destination attribute
+#     if hasattr(curRoom, attrib):
+#         # If so, return its value (the next room)
+#         return getattr(curRoom, attrib)
+
+#     # Otherwise print an error and stay in the same room
+#     print("You can't go that way")
+
+#     return curRoom 
