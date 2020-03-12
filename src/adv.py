@@ -1,10 +1,12 @@
 from room import Room
+from player import Player
 
+import os
+import re
 # Declare all the rooms
 
 room = {
-    'outside':  Room("Outside Cave Entrance",
-                     "North of you, the cave mount beckons"),
+    'outside':  Room("Outside Cave Entrance", "North of you, the cave mount beckons"),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -39,6 +41,26 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
+myPlayer = Player(input("Lets get your name: "), room['outside'])
+movement = ("n", "e", "s", "w")
+print(f"Welcome to the Adventure Game {myPlayer.name} \n\n")
+print(f"{myPlayer.current_room.name} is where you must make your first choice. \n Take a hint: {myPlayer.current_room.description}")
+print("\n")
+print(f"Please Choose a direction {movement}")
+
+
+while True:
+    playerInput = input("-> ")
+    if playerInput == "q":
+        os.system('clear')
+        break
+    elif playerInput in movement:
+        myPlayer.move(playerInput)
+    else:
+        print("Please Choose a valid key")
+
+
+# ---------------------- FROM BEFORE HOURS -------------------------
 # Write a loop that:
 #
 # * Prints the current room name
@@ -49,3 +71,20 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+# def tryDirection(d, curRoom):
+#     """
+#     Try to move a direction, or print an error if the player can't go that way.
+#     Returns the room the player has moved to (or the same room if the player
+#     didn't move).
+#     """
+#     attrib = d + '_to'
+
+#     # See if the room has the destination attribute
+#     if hasattr(curRoom, attrib):
+#         # If so, return its value (the next room)
+#         return getattr(curRoom, attrib)
+
+#     # Otherwise print an error and stay in the same room
+#     print("You can't go that way")
+
+#     return curRoom 
