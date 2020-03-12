@@ -41,59 +41,26 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-myPlayer = Player("Paul", room['outside'])
-print("Welcome to the Adventure Game")
-print(f"{myPlayer.current_room.name} is where {myPlayer.name} must make his choice  {myPlayer.current_room.description}")
-print("Please Choose a Room to enter")
+myPlayer = Player(input("Lets get your name: "), room['outside'])
+movement = ("n", "e", "s", "w")
+print(f"Welcome to the Adventure Game {myPlayer.name} \n\n")
+print(f"{myPlayer.current_room.name} is where you must make your first choice. \n Take a hint: {myPlayer.current_room.description}")
+print("\n")
+print(f"Please Choose a direction {movement}")
 
 
 while True:
-    print(f"You are in: {myPlayer.current_room.name}")
     playerInput = input("-> ")
-
-    movement = ["n", "e", "s", "w"]
-
     if playerInput == "q":
         os.system('clear')
         break
     elif playerInput in movement:
-        # MOVE IN THAT DIRECTION
-
-        if playerInput == "n":
-            if myPlayer.current_room.n_to:
-                myPlayer.current_room = myPlayer.current_room.n_to
-            else:
-                print(
-                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
-        elif playerInput == "s":
-            if myPlayer.current_room.s_to:
-                myPlayer.current_room = myPlayer.current_room.s_to
-            else:
-                print(
-                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
-        elif playerInput == "e":
-            if myPlayer.current_room.e_to:
-                myPlayer.current_room = myPlayer.current_room.e_to
-            else:
-                print(
-                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
-        elif playerInput == "w":
-            if myPlayer.current_room.w_to:
-                myPlayer.current_room = myPlayer.current_room.w_to
-            else:
-                print(
-                    f"Cannot Go That Way \n You remain in {myPlayer.current_room.name} \n Choose another direction")
-            # elif myPlayer.current_room.e_to:
-            #     myPlayer.current_room = myPlayer.current_room.e_to
-            # elif myPlayer.current_room.s_to:
-            #     myPlayer.current_room = myPlayer.current_room.s_to
-            # elif myPlayer.current_room.w_to:
-            #     myPlayer.current_room = myPlayer.current_room.w_to
-            # else:
-        # print(f"{myPlayer.name} is moving {playerInput}")
+        myPlayer.move(playerInput)
     else:
-        print("Please Choose a valid direction")
+        print("Please Choose a valid key")
 
+
+# ---------------------- FROM BEFORE HOURS -------------------------
 # Write a loop that:
 #
 # * Prints the current room name
